@@ -1,0 +1,9 @@
+# SQLite plugin
+## Install plugin
+## Configure plugin
+## Create database
+## Initial Data
+## Create form
+## Save data
+## Update data
+## Remove data
