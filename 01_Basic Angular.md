@@ -7,18 +7,28 @@ $ cd helloWorld
 $ npm init -y
 $ npm install angular bootstrap angular-ui-router --save
 ```
-## MVC pattern
+
 ## Controller
-- Create controller
+
+### Create controller
 
 ```
 angular.module('app', [])
     .controller('MainCtrl', function ($scope) {
        $scope.name = 'Satit Rianpit';
-       $scope.showName = function () { alert($scope.name); }; 
+       $scope.showName = function () { alert($scope.name); };
     });
 ```
-- Data binding
+
+### Controller directive
+
+```
+<div ng-controller="MainCtrl">
+    Welcome, {{ name }}
+</div>
+```
+
+### Data binding
 
 ```
 # JavaScript
@@ -26,10 +36,10 @@ $scope.name = 'Satit Rianpit';
 
 # HTML
 Welcome, <strong>{{ name }}</strong> <!-- one way -->
-<input type="text" ng-model="name" /> <-- two way --> 
+<input type="text" ng-model="name" /> <-- two way -->
 ```
 
-- Event
+### Event
 
 ```
 # JavaScript
@@ -48,7 +58,8 @@ $scope.setMe = function (event) {
 ```
 
 ## Directives
-- ng-repeat
+
+### `ng-repeat`
 
 ```
 # app.js
@@ -73,7 +84,8 @@ $scope.postcodes = [
     </li>
 </ul>
 ```
-- ng-if/ng-hide/ng-show
+
+### `ng-if/ng-hide/ng-show`
 
 ```
 # JavaScript
@@ -90,7 +102,8 @@ $scope.toggle = function () { $scope.success = !$scope.success };
 ```
 
 ## Service
-- Create service
+
+### Create service
 
 ```
 angular.module('app', [])
@@ -104,15 +117,15 @@ angular.module('app', [])
         name: 'Satit Rianpit',
         getName: function () {
             return this.name;
-        }, 
+        },
         setName: function (_name) {
             this.name = _name;
         }
     }
-}); 
+});
 ```
 
-- Ajax with $http
+### Ajax with `$http`
 
 ```
 .factory('MyService', function ($http) {
@@ -128,13 +141,173 @@ angular.module('app', [])
 ```
 
 ## Module and Dependencies Injection
-- App structure
-- Create module
-- Injection
+
+### App structure
+
+--app
+
+----controllers
+
+----services
+
+----filters
+
+--templates
+
+--index.html
+
+### Create module
+
+```
+# controller
+
+angular.module('app.controllers.Main', [])
+    .controller('MainCtrl', function () { });
+
+# service
+
+angular.module('app.services.Main', [])
+    .factory('MainService', function () {
+        return {
+            all: function () {},
+            update: function (id, name) {}
+        };
+    });
+
+# filter
+
+angular.module('app.filters.Convertor', [])
+    .filter('Convertor', function () {
+        return function (number) {
+            return number.fixed(2);
+        };
+    });
+
+```
+
+### Injection
+
+file: `app.js`
+
+```
+angular.module.('app', [
+    'app.controllers.Main',
+    'app.filters.Convertor',
+    'app.controllers.Users'
+    ])
+    .controller('ListCtrl', function ($scope, MainService) {
+        $scope.all = function () {
+            $scope.users = MainService.all();
+        };
+
+        $scope.update = function (id, name) {
+            MainService.update(id, name);
+        }
+    };
+```
+
+file: `users.js`
+
+```
+angular.module('app.controllers.Users', ['app.services.Main', 'app.filters.Convertor'])
+    .controller('UserCtrl', function ($scope) {
+
+    });
+```
+
+
 ## Routing
-- Install ui-router
-- Configure routing
-- Create template
-- Controller and Template
-- $stateParams
-- $state
+### Install ui-router
+
+```
+$ npm install angular-ui-router --save
+```
+
+### Configure routing
+
+file: `app.js`
+
+```
+angular.module('app', ['ui-router'])
+    .config(function($stateProvider, $urlRouterProvider) {
+        $urlRouterProvider.otherwise('/');
+
+        $stateProvider
+        .state('main', {
+            url: '/',
+            template: 'Welcome to my app'
+        })
+
+    })
+```
+
+### Create template
+
+file: `index.html`
+
+```
+<body>
+    <div class="container">
+        <ui-view></ui-view>
+    </div>
+</body>
+```
+
+### Controller and Template
+
+```
+angular.module('app', ['ui-router'])
+    .config(function($stateProvider, $urlRouterProvider) {
+
+        $stateProvider
+        .state('main', {
+            url: '/',
+            template: 'Welcome to my app',
+            controller: function ($scope) {
+                $scope.name = 'Satit Rianpit';
+            }
+        })
+        .state('about', {
+            url: '/about',
+            template: './templates/about.html',
+            controller: 'AboutCtrl'
+        })
+
+    });
+```
+
+### `$stateParams`
+
+```
+.state('detail', {
+    url: '/detail/:id',
+    templateUrl: './templates/detail',
+    controller: function ($scope, $stateParams, UserService) {
+        var userId = $stateParams.id;
+        UserService.detail(userId)
+            .then(function (detail) {
+                $scope.detail = detail;
+            });
+    }
+});
+
+# Html
+<a href="#/detail/20">User detail</a>
+
+```
+
+### `$state`
+
+```
+angular.module('app.controllers.Detail', [])
+.controller('MainCtrl', function ($scope, $state) {
+    $scope.redirect = function (state) {
+        $state.go(state);
+    };
+
+    $scope.redirectParameter = function (id) {
+        $state.go('detail', {id: 20});
+    };
+});
+
+```
