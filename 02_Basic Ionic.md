@@ -50,7 +50,8 @@ $ ionic run android | ios
 </ion-header-bar>
 ```
 
-*** `align-title` *** สามารถกำหนดได้เป็น `left`, `right`, หรือ `center` ค่าปกติ คือ `center`
+*** `align-title` ***
+สามารถกำหนดได้เป็น `left`, `right`, หรือ `center` ค่าปกติ คือ `center`
 
 #### Header with button
 
@@ -96,6 +97,9 @@ $ ionic run android | ios
 
 </ion-footer-bar>
 ```
+
+*** `align-title` ***
+สามารถกำหนดได้เป็น `left`, `right`, หรือ `center` ค่าปกติ คือ `center`
 
 #### Footer with button
 
