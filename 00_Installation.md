@@ -80,7 +80,7 @@ Download from: `http://developer.android.com/sdk/index.html`  โดยเลื
   และทำการแก้ไข PATH เพิ่มเติม โดยเพิ่ม PATH เข้าไป ดังนี้
 
   ```
-%ANDROID_HOME%\tools;%ANDROID_HOME%\platform-tools;C:\Users\satit\AppData\Roaming\npm
+%ANDROID_HOME%\tools;%ANDROID_HOME%\platform-tools
   ```
 
   ดังรูป
