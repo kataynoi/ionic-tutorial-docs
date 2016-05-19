@@ -327,6 +327,97 @@ list เราสามารถใช้ได้ทั้ง css และ dir
   </div>
 </div>
 ```
+## Tabs
+
+![](./images/img22.png)
+
+Tab เราสามารถใช้งานได้ทั้ง CSS และ Directive
+
+### CSS
+
+```
+<div class="tabs">
+  <a class="tab-item">
+    Home
+  </a>
+  <a class="tab-item">
+    Favorites
+  </a>
+  <a class="tab-item">
+    Settings
+  </a>
+</div>
+```
+
+### Directive
+
+```
+<ion-tabs class="tabs-positive tabs-icon-top">
+
+  <ion-tab title="Home" icon-on="ion-ios-filing" icon-off="ion-ios-filing-outline">
+    ...
+  </ion-tab>
+
+  <ion-tab title="About" icon-on="ion-ios-clock" icon-off="ion-ios-clock-outline">
+    ...
+  </ion-tab>
+
+  <ion-tab title="Settings" icon-on="ion-ios-gear" icon-off="ion-ios-gear-outline">
+    ...
+  </ion-tab>
+
+</ion-tabs>
+
+```
+
+เราสามารถกำหนดค่าเพิ่มเติมให้กับ `ion-tab` ได้ ดังนี้
+
+```
+<ion-tab
+  title="Tab!"
+  icon="my-icon"
+  href="#/tab/tab-link"
+  on-select="onTabSelected()"
+  on-deselect="onTabDeselected()">
+</ion-tab>
+```
+
+`icon-on` icon ขณะแท็บถูกเลือก, `icon-off` icon ขณะแท็บไม่ได้ถูกเลือก
+
+### Tab with icon only
+
+```
+<div class="tabs tabs-icon-only">
+  <a class="tab-item">
+    <i class="icon ion-home"></i>
+  </a>
+  <a class="tab-item">
+    <i class="icon ion-star"></i>
+  </a>
+  <a class="tab-item">
+    <i class="icon ion-gear-a"></i>
+  </a>
+</div>
+```
+
+### Tab with icon and text
+
+```
+<div class="tabs tabs-icon-top">
+  <a class="tab-item">
+    <i class="icon ion-home"></i>
+    Home
+  </a>
+  <a class="tab-item">
+    <i class="icon ion-star"></i>
+    Favorites
+  </a>
+  <a class="tab-item">
+    <i class="icon ion-gear-a"></i>
+    Settings
+  </a>
+</div>
+```
 
 ## Page navigation
 
