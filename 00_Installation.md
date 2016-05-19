@@ -71,7 +71,22 @@ Download from: `http://developer.android.com/sdk/index.html`  โดยเลื
 ![](./images/img01.png)
 เมื่อดาวน์โหลดเสร็จให้ทำการแตก zip ไฟล์ออกแล้วเก็บไว้ที่ C:\ ดังรูป
 ![](./images/img02.png)
+
 - Configure PATH
+  คลิกขวามือที่ `My Computer` แล้วเลือก `Properties -> Advanced System Settings -> Environment variables` แล้วคลิก `New` สร้างตัวแปรขึ้นมาใหม่ชื่อ `ANDROID_HOME` และกำหนดค่าเป็น `C:\android-sdk` ดังรูป
+
+  ![](./images/img07.png)
+
+  และทำการแก้ไข PATH เพิ่มเติม โดยเพิ่ม PATH เข้าไป ดังนี้
+
+  ```
+%ANDROID_HOME%\tools;%ANDROID_HOME%\platform-tools;C:\Users\satit\AppData\Roaming\npm
+  ```
+
+  ดังรูป
+
+  ![](./images/img08.png)
+
 - Install Android library and SDK tools
 เมื่อได้ทำการกำหนด PATH เสร็จเรียบร้อยแล้วให้รันคำสั่ง `android` ใน Terminal เพื่อติดตั้ง SDK ดังนี้
 
