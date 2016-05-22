@@ -105,8 +105,13 @@ $ android
 ***Android 6.0 (API 23)***
 ให้เลือก `SDK Platform`, `Google APIs ARM EABI v7a System Image`, `Google APIs`
 
+*** สำหรับเครื่องที่รองรับ VTx (Virtual Technology) ให้เลือก Image ที่เป็น x86 ด้วย ในกรณีนี้เลือก Intel x86 Atom System Image***
+
+![](./images/img23.png)
+
 ***Extras***
 ให้เลือก `Android Support Repository`, `Google Play service`, `Google Repository`, `Google USB Driver`, `Intel x86 Emulator Accelerator (HAXM installer)`
+
 
 - Create AVD (Android Virtual Device)
 

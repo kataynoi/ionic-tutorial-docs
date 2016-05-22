@@ -421,8 +421,152 @@ Tab เราสามารถใช้งานได้ทั้ง CSS แ�
 
 ## Page navigation
 
-## List and Form
-## Modal and Action Sheet
-## Tabs
+
+อ้างอิง
+- [http://ionicframework.com/docs/api/directive/ionView/](http://ionicframework.com/docs/api/directive/ionView/)
+- [http://ionicframework.com/docs/api/directive/ionNavBar/](http://ionicframework.com/docs/api/directive/ionNavBar/)
+- [http://ionicframework.com/docs/api/directive/ionNavButtons/](http://ionicframework.com/docs/api/directive/ionNavButtons/)
+
+
+### สร้าง project ใหม่
+
+```
+$ ionic start ionic-tab-app tabs
+$ cd ionic-tab-app tabs
+$ ionic platform add android
+```
+
+### Routing template
+
+ไฟล์ `index.html`
+
+```
+<ion-nav-bar class="bar-stable">
+  <ion-nav-back-button>
+  </ion-nav-back-button>
+</ion-nav-bar>
+<ion-nav-view></ion-nav-view>
+```
+
+ไฟล์ `templates/tabs.html`
+
+```
+<ion-tabs class="tabs-icon-top tabs-color-active-positive">
+
+  <!-- Dashboard Tab -->
+  <ion-tab title="Status" icon-off="ion-ios-pulse" icon-on="ion-ios-pulse-strong" href="#/tab/dash">
+    <ion-nav-view name="tab-dash"></ion-nav-view>
+  </ion-tab>
+
+  <!-- Chats Tab -->
+  <ion-tab title="Chats" icon-off="ion-ios-chatboxes-outline" icon-on="ion-ios-chatboxes" href="#/tab/chats">
+    <ion-nav-view name="tab-chats"></ion-nav-view>
+  </ion-tab>
+
+  <!-- Account Tab -->
+  <ion-tab title="Account" icon-off="ion-ios-gear-outline" icon-on="ion-ios-gear" href="#/tab/account">
+    <ion-nav-view name="tab-account"></ion-nav-view>
+  </ion-tab>
+
+
+</ion-tabs>
+
+```
+
+ไฟล์ `templates/tabs-dash.html`
+
+```
+<ion-view view-title="Dashboard">
+  <ion-content class="padding">
+    <h2>Welcome to Ionic</h2>
+  </ion-content>
+</ion-view>
+```
+
+
+### Routing configure
+
+```
+.config(function($stateProvider, $urlRouterProvider) {
+
+$stateProvider
+    .state('tab', {
+    url: '/tab',
+    abstract: true,
+    templateUrl: 'templates/tabs.html'
+  })
+  .state('tab.dash', {
+    url: '/dash',
+    views: {
+      'tab-dash': {
+        templateUrl: 'templates/tab-dash.html',
+        controller: 'DashCtrl'
+      }
+    }
+  })
+
+  .state('tab.chats', {
+      url: '/chats',
+      views: {
+        'tab-chats': {
+          templateUrl: 'templates/tab-chats.html',
+          controller: 'ChatsCtrl'
+        }
+      }
+    })
+
+    .state('tab.chat-detail', {
+      url: '/chats/:chatId',
+      views: {
+        'tab-chats': {
+          templateUrl: 'templates/chat-detail.html',
+          controller: 'ChatDetailCtrl'
+        }
+      }
+    })
+
+});
+```
+
+## Modal
+
+```
+# HTML
+
+<script id="my-modal.html" type="text/ng-template">
+  <ion-modal-view>
+    <ion-header-bar>
+      <h1 class="title">My Modal title</h1>
+    </ion-header-bar>
+    <ion-content>
+      Hello!
+    </ion-content>
+  </ion-modal-view>
+</script>
+
+# JavaScript
+
+$ionicModal.fromTemplateUrl('my-modal.html', {
+    scope: $scope,
+    animation: 'slide-in-up'
+  }).then(function(modal) {
+    $scope.modal = modal;
+  });
+  $scope.openModal = function() {
+    $scope.modal.show();
+  };
+  $scope.closeModal = function() {
+    $scope.modal.hide();
+  };
+
+  // event
+  $scope.$on('modal.hidden', function() {
+    // Execute action
+  });
+
+});
+
+```
+
 ## Emulate and Debugging
 
